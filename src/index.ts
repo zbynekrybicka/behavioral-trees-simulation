@@ -1,24 +1,32 @@
-import { BtState } from "./bt/bt"
-import BtCondition from "./bt/condition"
-import BtError from "./bt/error"
-import BtList from "./bt/list"
-import BtLog from "./bt/log"
-import BtLoop from "./bt/loop"
-import BtReset from "./bt/reset"
-import BtSequence from "./bt/sequence"
+import BtGame from "./bt/GameDesign/game"
 
+const strTree = ["BtGame",
+"\tAdventure Arkanoid",
+"\t\tBtGameObject",
+"\t\t\tSphere",
+"\t\t\t\tBtAsset",
+"\t\t\t\t\tAsset1",
+"\t\t\t\t\t\tBtUrlList",
+"\t\t\t\t\t\t\thttp://example.com/asset1",
+"\t\t\t\t\t\t\thttp://example.com/asset2",
+"\t\t\t\t\t\tBtDescription",
+"\t\t\t\t\t\t\tDescription of asset line 1",
+"\t\t\t\t\t\t\tDescription of asset line 2",
+"\t\t\t\t\t\t\tDescription of asset line 3",
+"\t\t\t\t\t\tBtImageList",
+"\t\t\t\t\t\t\tpath/to/image/1",
+"\t\t\t\t\t\t\tpath/to/image/2",
+"\t\t\t\t\t\t\tpath/to/image/3",
+// "\t\tBtEvent",
+]
 
-const root = new BtSequence([
-    new BtLoop(new BtLog("First step"), 4),
-    new BtLoop(new BtLog("Second step"), 10),
-    new BtLoop(new BtLog("Third step"), 2)
-])
+const classNames: { [key: string]: any } = {
+    [BtGame.name]: BtGame,
+}
 
-const interval = setInterval(() =>
-{
-    const actionResult: BtState = root.tick()
-    if (actionResult !== BtState.RUNNING) {
-        clearInterval(interval)
-        console.log(actionResult)
-    }
-}, 100)
+const className: any = strTree[0]
+// console.log(className)
+strTree.shift()
+const rootNode = new classNames[className](strTree)
+// rootNode.action()
+console.log(JSON.stringify(rootNode, null, 2))
