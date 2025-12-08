@@ -24,9 +24,8 @@ const classNames: { [key: string]: any } = {
     [BtGame.name]: BtGame,
 }
 
-const className: any = strTree[0]
+const className: any = strTree.shift
 // console.log(className)
-strTree.shift()
 const rootNode = new classNames[className](strTree)
 // rootNode.action()
 console.log(JSON.stringify(rootNode, null, 2))
